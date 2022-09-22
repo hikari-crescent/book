@@ -18,7 +18,7 @@ I think this will make it better than other guides.
 - [ ] Foreign ext libs
 
 ### Hikari things that are not related to crescent
-- [ ] Compnent support with miru
+- [ ] Component support with miru
 - [ ] Voice Support
 
 ### Extending/Hacking crescent
