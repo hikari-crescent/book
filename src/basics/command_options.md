@@ -60,7 +60,7 @@ class MyCommand:
 ## More Information On Types
 Strings, Ints, Floats, and Booleans all use python's built in types.
 
-> If you are compfterable reading function overloads you can look at
+> If you are comfortable reading function overloads you can look at
 > [the source code](https://github.com/magpie-dev/hikari-crescent/blob/main/crescent/commands/options.py#L140).
 
 ```python
