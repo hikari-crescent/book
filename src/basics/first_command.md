@@ -6,7 +6,7 @@ Before you can create a command, you need to create a bot.
 ```python
 import crescent
 
-bot = crescent.Bot("YOUR_TOKEN_TOKEN")
+bot = crescent.Bot("YOUR_BOT_TOKEN")
 
 
 # `bot.run()` starts the bot.
@@ -15,7 +15,7 @@ bot.run()
 
 ```
 
-> ⚠️ Stroing your token in your source code is a bad idea. In later sections
+> ⚠️ Storing your token in your source code is a bad idea. In later sections
 > we will go over how to do this properly.
 
 
@@ -37,27 +37,27 @@ class PingCommand:
 bot.run()
 ```
 
-So whats going on here? `@crescent.command` turns your class into a command object.
+So what's going on here? `@crescent.command` turns your class into a command object.
 `@bot.include` adds the command to your bot. Many objects in Crescent can be added
-to your bot with `@bot.include`, there are called Includables and we will go over
+to your bot with `@bot.include`, these are called Includables and we will go over
 them in more detail later.
 
 #### Type Hints
 
-If you are new to python you may not have seen `ctx: crescent.Context` before. This
-is called a type hint. It tells the reader what type `ctx`, and your IDE can use
-type hints to provide better autocomplete. Although they are not required, its
-reccomended to use type hints whenever you can.
+If you are new to Python you may not have seen `ctx: crescent.Context` before. This
+is called a type hint. It tells the reader what type `ctx` is, and your IDE can use
+type hints to provide better autocomplete. Although they are not required, it's
+recommended to use type hints whenever you can.
 
 ```python
-#  The name of the argument
+#      The name of the argument
 #                 \/
 def my_function(argument: SomeType)
 #                           /\
-# The type of the argument
+#                The type of the argument
 #
-# The argument name and argument type seperated
-# with a colon.
+# The argument name and argument type
+# are seperated with a colon.
 ```
 
 ## Adding Options
@@ -80,4 +80,4 @@ class SayCommand:
 ```
 
 Crescent's option syntax is type safe.
-(You don't need to worry about this if you are new to python!)
+(You don't need to worry about this if you are new to Python!)
