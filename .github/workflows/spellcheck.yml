@@ -1,0 +1,12 @@
+name: spellcheck
+on: [push, pull_request]
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v1
+    - uses: BSFishy/pip-action@v1
+      with:
+        packages: codespell
+    - run: codespell src README.md

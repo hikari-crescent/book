@@ -57,7 +57,7 @@ def my_function(argument: SomeType)
 #                The type of the argument
 #
 # The argument name and argument type
-# are seperated with a colon.
+# are separated with a colon.
 ```
 
 ## Adding Options
