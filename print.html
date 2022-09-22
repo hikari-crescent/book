@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basics/basics.html"><strong aria-hidden="true">2.</strong> The Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basics/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basics/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basics/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basics/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="basics/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="https://magpie-dev.github.io/hikari-crescent/crescent.html">API Reference</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -331,7 +331,25 @@ async def ping(ctx: crescent.Context):
     await ctx.respond(&quot;Pong!&quot;)
 </code></pre>
 <p>It is recommended to use function commands when your command does not have any options.</p>
-<div style="break-before: page; page-break-before: always;"></div>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="command-advanced"><a class="header" href="#command-advanced">Command Advanced</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="user-and-message-commands"><a class="header" href="#user-and-message-commands">User and Message commands</a></h1>
+<p>So far only slash commands have been covered. There is two more types of application
+commands: user context menu and message context menu commands. You can use these
+by right clicking on a user or message respectively.</p>
+<p>Both user and message commands are only supported as functions.</p>
+<pre><code class="language-python">@bot.include
+@crescent.user_command
+async def user_command(ctx: crescent.Context, user: hikari.User):
+    ...
+
+
+@bot.include
+@crescent.message_command
+async def message_command(ctx: crescent.Context, message: hikari.Message):
+    ...
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="api-reference"><a class="header" href="#api-reference">API Reference</a></h1>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

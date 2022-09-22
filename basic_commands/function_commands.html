@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Command options - Crescent: A Beginner&#x27;s Guide</title>
+        <title>Function Commands - Crescent: A Beginner&#x27;s Guide</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../basics/basics.html"><strong aria-hidden="true">2.</strong> The Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../basics/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="../basics/command_options.html" class="active"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="../basics/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="../basics/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="../basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="../basic_commands/function_commands.html" class="active"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="../basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="../advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="../advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="../advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="../advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../https://magpie-dev.github.io/hikari-crescent/crescent.html">API Reference</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,120 +134,24 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="command-options"><a class="header" href="#command-options">Command Options</a></h1>
-<p>As seen in the previous section, command options can be created with the <code>crescent.option</code> function.</p>
-<p>This is what a command with an option called <code>name</code> looks like in the Discord client..</p>
-<p><img src="https://i.imgur.com/NXAJnZv.png" alt="" /></p>
-<p>Options can also have a custom description and name. If no description is provided,
-the description will default to &quot;No Description&quot;. This example shows an option 
-amed &quot;option&quot; with the description &quot;your custom description&quot;. The secondoption, <code>option2</code>,
-has the name &quot;custom-name&quot; and description &quot;also your custom description&quot;.</p>
+                        <h1 id="function-commands"><a class="header" href="#function-commands">Function Commands</a></h1>
+<p>Class commands can be cumbersome for small commands. Crescent provides function
+commands for those cases.</p>
 <pre><code class="language-python">@bot.include
 @crescent.command
-class MyCommand:
-    option = crescent.option(str, &quot;your custom description&quot;)
-    option2 = crescent.option(str, name=&quot;custom-name&quot;, description=&quot;also your custom description&quot;)
-
-    async def callback(self, ctx: crescent.Context) -&gt; None:
-        ...
-
-    # The `...` is a placeholder that means that your code
-    # should go there instead.
+async def ping(ctx: crescent.Context):
+    await ctx.respond(&quot;Pong!&quot;)
 </code></pre>
-<h2 id="option-types"><a class="header" href="#option-types">Option Types</a></h2>
-<p>Crescent provides these option types. You can find more information on option types <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type">here</a> (You can ignore <code>SUBCOMMAND</code> and <code>SUBCOMMAND_GROUP</code> for now.)
-This might look a bit daunting, but we will go into detail on what each option type is in this section.</p>
-<div class="table-wrapper"><table><thead><tr><th>Type</th><th>Option Type</th></tr></thead><tbody>
-<tr><td><code>str</code></td><td>Text</td></tr>
-<tr><td><code>int</code></td><td>Integer</td></tr>
-<tr><td><code>bool</code></td><td>Boolean</td></tr>
-<tr><td><code>float</code></td><td>Number</td></tr>
-<tr><td><code>hikari.User</code></td><td>User</td></tr>
-<tr><td><code>hikari.Role</code></td><td>Role</td></tr>
-<tr><td><code>crescent.Mentionable</code></td><td>Role or User</td></tr>
-<tr><td>Any Hikari channel type.</td><td>Channel. The options will be the channel type and its subclasses.</td></tr>
-<tr><td><code>List[Channel Types]</code></td><td>Channel. ^</td></tr>
-<tr><td><code>hikari.Attachment</code></td><td>Attachment</td></tr>
-</tbody></table>
-</div>
-<h2 id="making-options-optional"><a class="header" href="#making-options-optional">Making options optional</a></h2>
-<p>Options will be optional if a default value is provided. This example
-shows an option with the default value <code>None</code>.</p>
-<pre><code class="language-python">@bot.include
-@crescent.command(name=&quot;command&quot;)
-class MyCommand:
-    optional_option = crescent.option(str, default=None)
-
-    async def callback(self, ctx: crescent.Context) -&gt; None:
-        ...
-</code></pre>
-<h2 id="more-information-on-types"><a class="header" href="#more-information-on-types">More Information On Types</a></h2>
-<p>Strings, Ints, Floats, and Booleans all use python's built in types.</p>
-<blockquote>
-<p>If you are comfortable reading function overloads you can look at
-<a href="https://github.com/magpie-dev/hikari-crescent/blob/main/crescent/commands/options.py#L140">the source code</a>.</p>
-</blockquote>
-<pre><code class="language-python">@bot.include
-@crescent.command(name=&quot;command&quot;)
-class MyCommand:
-    word = crescent.option(str)
-    integer = crescent.option(int)
-    number = crescent.option(float)
-    boolean = crescent.option(bool)
-
-    async def callback(self, ctx: crescent.Context) -&gt; None:
-        # You can now do something with the options.
-        await ctx.respond(
-            f&quot;{self.word}\n{self.integer}\n{self.number}\n{self.boolean}&quot;
-        )
-</code></pre>
-<p>These types use a hikari object.</p>
-<pre><code class="language-python">import hikari
-
-@bot.include
-@crescent.command(name=&quot;command&quot;)
-class MyCommand:
-    user = crescent.option(hikari.User)
-    role = crescent.option(hikari.Role)
-    attachment = crescent.option(hikari.Attachment)
-
-    # The channel type will be restricted depending on what
-    # channel object you choose. In this example only channels
-    # that users can type in can be chosen.
-    channel = crescent.option(hikari.TextableChannel)
-
-    # This option can only be voice channels.
-    voice_channel = crescent.option(hikari.GuildVoiceChannel)
-
-
-    async def callback(self, ctx: crescent.Context) -&gt; None:
-        ...
-</code></pre>
-<p>The final option type is mentionable, which allows a user to choose a user or role.</p>
-<pre><code class="language-python">import hikari
-
-@bot.include
-@crescent.command(name=&quot;command&quot;)
-class MyCommand:
-    mentionable = crescent.Mentionable
-
-    async def callback(self, ctx: crescent.Context) -&gt; None:
-        if self.mentionable.user:
-            # This is a user. `mentionable.role` will be `None`.
-            await ctx.respond(&quot;You picked a user!&quot;)
-        if self.mentionable.role:
-            # This is a role. `mentionable.user` will be `None`.
-            await ctx.respond(&quot;You picked a role!&quot;)
-</code></pre>
+<p>It is recommended to use function commands when your command does not have any options.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../basics/first_command.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../basic_commands/command_options.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../basics/function_commands.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../basic_commands/exercises.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -256,10 +160,10 @@ class MyCommand:
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../basics/first_command.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../basic_commands/command_options.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../basics/function_commands.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../basic_commands/exercises.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
