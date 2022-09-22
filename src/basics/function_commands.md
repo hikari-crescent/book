@@ -10,4 +10,4 @@ async def ping(ctx: crescent.Context):
     await ctx.respond("Pong!")
 ```
 
-It is recomended to use function commands when your command does not have any options.
+It is recommended to use function commands when your command does not have any options.
