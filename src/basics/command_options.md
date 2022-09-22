@@ -29,6 +29,7 @@ class MyCommand:
 ## Option Types
 Crescent provides these option types. You can find more information on option types [here](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type) (You can ignore `SUBCOMMAND` and `SUBCOMMAND_GROUP` for now.)
 This might look a bit daunting, but we will go into detail on what each option type is in this section.
+
 | Type | Option Type |
 |---|---|
 | `str` | Text |
