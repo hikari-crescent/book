@@ -239,19 +239,20 @@ class MyCommand:
 </code></pre>
 <h2 id="option-types"><a class="header" href="#option-types">Option Types</a></h2>
 <p>Crescent provides these option types. You can find more information on option types <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type">here</a> (You can ignore <code>SUBCOMMAND</code> and <code>SUBCOMMAND_GROUP</code> for now.)
-This might look a bit daunting, but we will go into detail on what each option type is in this section.
-| Type | Option Type |
-|---|---|
-| <code>str</code> | Text |
-| <code>int</code> | Integer |
-| <code>bool</code> | Boolean |
-| <code>float</code> | Number |
-| <code>hikari.User</code> | User |
-| <code>hikari.Role</code> | Role |
-| <code>crescent.Mentionable</code> | Role or User |
-| Any Hikari channel type. | Channel. The options will be the channel type and its subclasses. |
-| <code>List[Channel Types]</code> | Channel. ^ |
-| <code>hikari.Attachment</code> | Attachment |</p>
+This might look a bit daunting, but we will go into detail on what each option type is in this section.</p>
+<div class="table-wrapper"><table><thead><tr><th>Type</th><th>Option Type</th></tr></thead><tbody>
+<tr><td><code>str</code></td><td>Text</td></tr>
+<tr><td><code>int</code></td><td>Integer</td></tr>
+<tr><td><code>bool</code></td><td>Boolean</td></tr>
+<tr><td><code>float</code></td><td>Number</td></tr>
+<tr><td><code>hikari.User</code></td><td>User</td></tr>
+<tr><td><code>hikari.Role</code></td><td>Role</td></tr>
+<tr><td><code>crescent.Mentionable</code></td><td>Role or User</td></tr>
+<tr><td>Any Hikari channel type.</td><td>Channel. The options will be the channel type and its subclasses.</td></tr>
+<tr><td><code>List[Channel Types]</code></td><td>Channel. ^</td></tr>
+<tr><td><code>hikari.Attachment</code></td><td>Attachment</td></tr>
+</tbody></table>
+</div>
 <h2 id="making-options-optional"><a class="header" href="#making-options-optional">Making options optional</a></h2>
 <p>Options will be optional if a default value is provided. This example
 shows an option with the default value <code>None</code>.</p>
