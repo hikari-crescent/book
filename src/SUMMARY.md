@@ -2,11 +2,20 @@
 
 - [Introduction](./intro.md)
 
-## The Basics
+- [Command Basics](./basic_commands/intro.md)
+    - [Making a bot application](./basic_commands/making_a_bot.md)
+    - [Your first command](./basic_commands/first_command.md)
+    - [Command options](./basic_commands/command_options.md)
+    - [Function Commands](./basic_commands/function_commands.md)
+    - [Exercises](./basic_commands/exercises.md)
 
-- [The Basics](./basics/basics.md)
-    - [Making a bot application](./basics/making_a_bot.md)
-    - [Your first command](./basics/first_command.md)
-    - [Command options](./basics/command_options.md)
-    - [Function Commands](./basics/function_commands.md)
-    - [Exercises](./basics/exercises.md)
+- [Command Advanced](./advanced_commands/intro.md)
+    - [Message and user commands](./advanced_commands/user_message.md)
+    - [Command Groups](./advanced_commands/command_groups.md)
+    - [A Look into Context](./advanced_commands/context_deep_dive.md)
+    - [Hooks](./advanced_commands/hooks.md)
+    - [Exercises](./advanced_commands/exercises.md)
+
+---
+
+[API Reference](https://magpie-dev.github.io/hikari-crescent/crescent.html)
