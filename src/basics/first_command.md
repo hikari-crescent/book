@@ -31,11 +31,15 @@ bot = crescent.Bot("YOUR_BOT_TOKEN")
 @bot.include
 @crescent.command(name="ping", description="Ping the bot.")
 class PingCommand:
-    async def callback(self, ctx: crescent.Context)
+    async def callback(self, ctx: crescent.Context) -> None:
         await ctx.respond("Pong!")
 
 bot.run()
 ```
+
+> ⚠️ Commands must call within 3 seconds or call `await ctx.defer()` to
+> get 15 minutes to respond.
+
 
 So what's going on here? `@crescent.command` turns your class into a command object.
 `@bot.include` adds the command to your bot. Many objects in Crescent can be added
@@ -50,9 +54,9 @@ type hints to provide better autocomplete. Although they are not required, it's
 recommended to use type hints whenever you can.
 
 ```python
-#      The name of the argument
-#                 \/
-def my_function(argument: SomeType)
+#      The name of the argument   The return type
+#                 \/                    \/
+def my_function(argument: SomeType) -> None:
 #                           /\
 #                The type of the argument
 #
@@ -74,10 +78,11 @@ class SayCommand:
 #                           /\
 # The type of the command option
 
-    async def callback(self, ctx: crescent.Context):
+    async def callback(self, ctx: crescent.Context) -> None:
         # options are accessed attributes on the class
         await ctx.respond(self.word)
 ```
 
-Crescent's option syntax is type safe.
+Crescent's option syntax is type safe. This means that commands will
+seamlessly work with typecheckers like mypy and pyright.
 (You don't need to worry about this if you are new to Python!)
