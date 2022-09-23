@@ -50,7 +50,7 @@ async def my_command(ctx: crescent.Context) -> None:
 
 ## Running a hook after a command
 To run a hook after a command, add `after=True` to the decorator.
-This command will return "General Kenobi" then "Hello there" in two seperate messages.
+This command will return "General Kenobi" then "Hello there" in two separate messages.
 ```python
 async def my_hook(ctx: crescent.Context) -> None:
     await ctx.respond("Hello there")

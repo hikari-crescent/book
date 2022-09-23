@@ -26,7 +26,7 @@ This is a list of useful properties on the `Context` class.
 ### Custom Context
 You may want to use a custom context class for a variety of reasons.
 This example shows how to use a custom context class for better typing
-infromation.
+information.
 
 ```python
 class MyBotClass(crescent.Bot):
@@ -43,7 +43,7 @@ async def my_command(ctx: CustomContext):
 You can also inherit from `crescent.BaseContext` if you dont want any of
 `crescent.Context`'s attributes in your class.
 
-> ⚠️ This is not recomended if you are new to the library.
+> ⚠️ This is not recommended if you are new to the library.
 
 ```python
 class CustomContext(crescent.Context):
