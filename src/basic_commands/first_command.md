@@ -15,7 +15,7 @@ bot.run()
 
 ```
 
-> ⚠️ Storing your token in your source code is a bad idea. In later sections
+> ⚠️ Storing your token in your source code is a bad idea. In later sections,
 > we will go over how to do this properly.
 
 
@@ -37,7 +37,7 @@ class PingCommand:
 bot.run()
 ```
 
-> ⚠️ Commands must call within 3 seconds or call `await ctx.defer()` to
+> ⚠️ Commands must call `await ctx.respond()` within 3 seconds or call `await ctx.defer()` to
 > get 15 minutes to respond.
 
 
@@ -48,9 +48,9 @@ them in more detail later.
 
 #### Type Hints
 
-If you are new to Python you may not have seen `ctx: crescent.Context` before. This
+If you are new to Python, you may not have seen `ctx: crescent.Context` before. This
 is called a type hint. It tells the reader what type `ctx` is, and your IDE can use
-type hints to provide better autocomplete. Although they are not required, it's
+type hints to provide better autocomplete. Although they are not required, it is
 recommended to use type hints whenever you can.
 
 ```python
