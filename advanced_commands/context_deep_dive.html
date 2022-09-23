@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="../basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="../basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="../basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="../advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="../advanced_commands/context_deep_dive.html" class="active"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="../advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="../advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../https://magpie-dev.github.io/hikari-crescent/crescent.html">API Reference</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="../basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="../basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="../basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="../advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="../advanced_commands/context_deep_dive.html" class="active"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="../advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="../advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li><li class="spacer"></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,7 +134,53 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="a-look-into-context"><a class="header" href="#a-look-into-context">A Look Into Context</a></h1>
+<p>The <code>crescent.Context</code> object allows you to respond to interactions.
+In this chapter we will look at the methods it has and using a custom context object.</p>
+<h3 id="attributes"><a class="header" href="#attributes">Attributes</a></h3>
+<p>These are the only methods you will need to use on the <code>Class</code> class. They are all async.</p>
+<ul>
+<li><code>Context.respond</code> - Respond to an interaction.</li>
+<li><code>Context.defer</code> - Defer a message, giving you 15 minutes to respond instead of 3 seconds.</li>
+<li><code>Context.edit</code> - Edit a response to an interaction.</li>
+</ul>
+<p>This is a list of useful properties on the <code>Context</code> class.</p>
+<ul>
+<li><code>interaction</code> The interaction object.</li>
+<li><code>app</code> - The application instance. (Your bot object)</li>
+<li><code>channel_id</code>- The channel ID of the channel that the interaction was used in.</li>
+<li><code>channel</code>- The channel that the interaction was used in, if the channel is cached.</li>
+<li><code>guild_id</code> - The guild ID of the guild that this interaction was used in, if used in a guild.</li>
+<li><code>guild</code> - The guild that this interaction was used in, if the guild is cached.</li>
+<li><code>user</code>- The user who triggered this command interaction.</li>
+<li><code>member</code> - The member object for the user that triggered this interaction, if used in a guild.</li>
+</ul>
+<h3 id="custom-context"><a class="header" href="#custom-context">Custom Context</a></h3>
+<p>You may want to use a custom context class for a variety of reasons.
+This example shows how to use a custom context class for better typing
+information.</p>
+<pre><code class="language-python">class MyBotClass(crescent.Bot):
+    ...
+
+class CustomContext(crescent.Context):
+    app: MyBotClass
+
+
+async def my_command(ctx: CustomContext):
+    reveal_type(ctx.app) # `MyBotClass`
+</code></pre>
+<p>You can also inherit from <code>crescent.BaseContext</code> if you dont want any of
+<code>crescent.Context</code>'s attributes in your class.</p>
+<blockquote>
+<p>⚠️ This is not recommended if you are new to the library.</p>
+</blockquote>
+<pre><code class="language-python">class CustomContext(crescent.Context):
+    ...
+
+async def my_command(ctx: CustomContext):
+    reveal_type(ctx.app)
+</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

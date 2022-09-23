@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="https://magpie-dev.github.io/hikari-crescent/crescent.html">API Reference</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li><li class="spacer"></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -312,7 +312,7 @@ class MyCommand:
 @bot.include
 @crescent.command(name=&quot;command&quot;)
 class MyCommand:
-    mentionable = crescent.Mentionable
+    mentionable = crescent.option(crescent.Mentionable)
 
     async def callback(self, ctx: crescent.Context) -&gt; None:
         if self.mentionable.user:
@@ -332,6 +332,7 @@ async def ping(ctx: crescent.Context):
 </code></pre>
 <p>It is recommended to use function commands when your command does not have any options.</p>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="command-advanced"><a class="header" href="#command-advanced">Command Advanced</a></h1>
+<p>This section covers advanced information for commands.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="user-and-message-commands"><a class="header" href="#user-and-message-commands">User and Message commands</a></h1>
 <p>So far only slash commands have been covered. There is two more types of application
 commands: user context menu and message context menu commands. You can use these
@@ -348,8 +349,157 @@ async def user_command(ctx: crescent.Context, user: hikari.User):
 async def message_command(ctx: crescent.Context, message: hikari.Message):
     ...
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="api-reference"><a class="header" href="#api-reference">API Reference</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="command-groups"><a class="header" href="#command-groups">Command Groups</a></h1>
+<p>Can commands can be grouped or grouped into groups of groups.
+In Crescent these groups are called <code>groups</code> and <code>sub_groups</code>.</p>
+<pre><code class="language-python">import crescent
 
+# Create a group
+group = crescent.Group(&quot;outer-group&quot;)
+# Create a sub group
+sub_group = group.sub_group(&quot;inner-group&quot;)
+</code></pre>
+<p>To add a command to a group simply do:</p>
+<pre><code class="language-python">@bot.include
+@group.child
+@crescent.command
+async def group_command(ctx: crescent.Context):
+    ...
+
+@bot.include
+@sub_group.child
+@crescent.command
+async def sub_group_command(ctx: crescent.Context):
+    ...
+</code></pre>
+<p>Do not combine the <code>group</code> and <code>sub_group</code> decorators. This will cause a command to be
+registered multiple times.</p>
+<h3 id="illegal-combos"><a class="header" href="#illegal-combos">Illegal Combos</a></h3>
+<p>You can not create a group with the same name as a command.</p>
+<pre><code class="language-python">help_group = crescent.Group(&quot;help&quot;)
+
+@bot.include
+@help_group.child
+@crescent.command
+async def say(ctx: crescent.Context):
+    ...
+
+# This command will cause the bot to crash
+@bot.include
+@crescent.command
+async def help(ctx: crescent.Context):
+    ...
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="a-look-into-context"><a class="header" href="#a-look-into-context">A Look Into Context</a></h1>
+<p>The <code>crescent.Context</code> object allows you to respond to interactions.
+In this chapter we will look at the methods it has and using a custom context object.</p>
+<h3 id="attributes"><a class="header" href="#attributes">Attributes</a></h3>
+<p>These are the only methods you will need to use on the <code>Class</code> class. They are all async.</p>
+<ul>
+<li><code>Context.respond</code> - Respond to an interaction.</li>
+<li><code>Context.defer</code> - Defer a message, giving you 15 minutes to respond instead of 3 seconds.</li>
+<li><code>Context.edit</code> - Edit a response to an interaction.</li>
+</ul>
+<p>This is a list of useful properties on the <code>Context</code> class.</p>
+<ul>
+<li><code>interaction</code> The interaction object.</li>
+<li><code>app</code> - The application instance. (Your bot object)</li>
+<li><code>channel_id</code>- The channel ID of the channel that the interaction was used in.</li>
+<li><code>channel</code>- The channel that the interaction was used in, if the channel is cached.</li>
+<li><code>guild_id</code> - The guild ID of the guild that this interaction was used in, if used in a guild.</li>
+<li><code>guild</code> - The guild that this interaction was used in, if the guild is cached.</li>
+<li><code>user</code>- The user who triggered this command interaction.</li>
+<li><code>member</code> - The member object for the user that triggered this interaction, if used in a guild.</li>
+</ul>
+<h3 id="custom-context"><a class="header" href="#custom-context">Custom Context</a></h3>
+<p>You may want to use a custom context class for a variety of reasons.
+This example shows how to use a custom context class for better typing
+information.</p>
+<pre><code class="language-python">class MyBotClass(crescent.Bot):
+    ...
+
+class CustomContext(crescent.Context):
+    app: MyBotClass
+
+
+async def my_command(ctx: CustomContext):
+    reveal_type(ctx.app) # `MyBotClass`
+</code></pre>
+<p>You can also inherit from <code>crescent.BaseContext</code> if you dont want any of
+<code>crescent.Context</code>'s attributes in your class.</p>
+<blockquote>
+<p>⚠️ This is not recommended if you are new to the library.</p>
+</blockquote>
+<pre><code class="language-python">class CustomContext(crescent.Context):
+    ...
+
+async def my_command(ctx: CustomContext):
+    reveal_type(ctx.app)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hooks"><a class="header" href="#hooks">Hooks</a></h1>
+<p>Hooks allow you to run code before or after a command is run. They also allow you
+to create checks for a certain command.</p>
+<p>This is a simple hook that says &quot;hello there&quot; before every command you hook it to.</p>
+<pre><code class="language-python">async def my_hook(ctx: crescent.Context) -&gt; None:
+    await ctx.respond(&quot;Hello there&quot;)
+</code></pre>
+<p>To use this hook on a command, simply do:</p>
+<pre><code class="language-python">
+@bot.include
+@crescent.hook(my_hook)
+@crescent.command
+async def my_command(ctx: crescent.Context) -&gt; None:
+    await ctx.respond(&quot;General Kenobi&quot;)
+</code></pre>
+<p>This command will respond &quot;Hello there&quot; and &quot;General kenobi&quot; in two different messages.</p>
+<p>You can access command options in hooks with <code>ctx.options</code>. This is a dict of option name to
+option value.</p>
+<h2 id="using-hooks-as-checks"><a class="header" href="#using-hooks-as-checks">Using hooks as checks</a></h2>
+<p>You can also stop a command callback from running in a hook. Simply return <code>crescent.HookResult(exit=True)</code></p>
+<p>This is a command that uses that feature. It stops you from using the command if your name has an &quot;L&quot; in it.</p>
+<pre><code class="language-python">async def no_Ls_allowed(ctx: crescent.Context) -&gt; crescent.HookResult:
+    if &quot;l&quot; in ctx.user.username.lower():
+        await ctx.respond(&quot;You can't use this command!&quot;)
+        return crescent.HookResult(exit=True)
+
+    return crescent.HookResult()
+
+@bot.include
+@crescent.hook(no_Ls_allowed)
+@crescent.command
+async def my_command(ctx: crescent.Context) -&gt; None:
+    await ctx.respond(&quot;Hello&quot;)
+</code></pre>
+<h2 id="running-a-hook-after-a-command"><a class="header" href="#running-a-hook-after-a-command">Running a hook after a command</a></h2>
+<p>To run a hook after a command, add <code>after=True</code> to the decorator.
+This command will return &quot;General Kenobi&quot; then &quot;Hello there&quot; in two separate messages.</p>
+<pre><code class="language-python">async def my_hook(ctx: crescent.Context) -&gt; None:
+    await ctx.respond(&quot;Hello there&quot;)
+</code></pre>
+<p>To use this hook on a command, simply do:</p>
+<pre><code class="language-python">
+@bot.include
+@crescent.hook(my_hook, after=True)
+@crescent.command
+async def my_command(ctx: crescent.Context) -&gt; None:
+    await ctx.respond(&quot;General Kenobi&quot;)
+</code></pre>
+<h2 id="adding-hooks-to-more-than-commands"><a class="header" href="#adding-hooks-to-more-than-commands">Adding hooks to more than commands</a></h2>
+<p>Bots and plugins (we will cover these later) support hooks by adding them with the
+<code>command_hooks</code> and <code>command_after_hooks</code> kwargs. Hooks on the bot object will run
+for all commands. Hooks on the plugin object will run for all commands in that plugin.</p>
+<pre><code class="language-python">bot = crescent.Bot(&quot;...&quot;, command_hooks=[hook_a, hook_b])
+</code></pre>
+<p><code>crescent.Group</code> and <code>crescent.SubGroup</code> also support hooks. Use the <code>hooks</code> and <code>after_hooks</code>
+kwargs to add them. Groups and sub groups will add hooks to any commands in their respective
+groups.</p>
+<pre><code class="language-python">group = crescent.Group(&quot;group&quot;, hooks=[hook_a])
+sub_group = group.sub_group(&quot;sub-group&quot;, hooks=[hook_b])
+</code></pre>
+<p>Sub groups will inherit all hooks from the group.</p>
+<h3 id="hook-resolution-order"><a class="header" href="#hook-resolution-order">Hook Resolution Order</a></h3>
+<p><code>Command -&gt; Sub Group -&gt; Group -&gt; Plugin -&gt; Bot</code></p>
+<div style="break-before: page; page-break-before: always;"></div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
