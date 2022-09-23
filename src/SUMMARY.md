@@ -18,4 +18,4 @@
 
 ---
 
-[API Reference](https://magpie-dev.github.io/hikari-crescent/crescent.html)
+<!-- [API Reference](https://magpie-dev.github.io/hikari-crescent/crescent.html) -->

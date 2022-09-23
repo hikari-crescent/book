@@ -112,7 +112,7 @@ import hikari
 @bot.include
 @crescent.command(name="command")
 class MyCommand:
-    mentionable = crescent.Mentionable
+    mentionable = crescent.option(crescent.Mentionable)
 
     async def callback(self, ctx: crescent.Context) -> None:
         if self.mentionable.user:
