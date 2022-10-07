@@ -9,7 +9,7 @@ I think this will make it better than other guides.
 
 - [ ] Sales pitch
 - [ ] basics
-- [ ] advanced commands (such as groups, message commands, user commands)
+- [x] advanced commands (such as groups, message commands, user commands)
 - [ ] advanced (plugins and hooks)
 - [ ] ext
     - [ ] tasks
