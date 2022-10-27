@@ -19,7 +19,7 @@
 - [Plugins](./plugins/intro.md)
 
 - [Extension Modules](./ext/intro.md)
-    - [Cooldown](./ext/cooldowns.md)
+    - [Cooldowns](./ext/cooldowns.md)
     - [Tasks](./ext/tasks.md)
 
 ---
