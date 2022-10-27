@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li><li class="spacer"></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="plugins/intro.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li class="spacer"></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -159,7 +159,7 @@ bot.run()
 
 </code></pre>
 <blockquote>
-<p>⚠️ Storing your token in your source code is a bad idea. In later sections
+<p>⚠️ Storing your token in your source code is a bad idea. In later sections,
 we will go over how to do this properly.</p>
 </blockquote>
 <p>The first command we will make is the ping command.</p>
@@ -178,7 +178,7 @@ class PingCommand:
 bot.run()
 </code></pre>
 <blockquote>
-<p>⚠️ Commands must call within 3 seconds or call <code>await ctx.defer()</code> to
+<p>⚠️ Commands must call <code>await ctx.respond()</code> within 3 seconds or call <code>await ctx.defer()</code> to
 get 15 minutes to respond.</p>
 </blockquote>
 <p>So what's going on here? <code>@crescent.command</code> turns your class into a command object.
@@ -186,9 +186,9 @@ get 15 minutes to respond.</p>
 to your bot with <code>@bot.include</code>, these are called Includables and we will go over
 them in more detail later.</p>
 <h4 id="type-hints"><a class="header" href="#type-hints">Type Hints</a></h4>
-<p>If you are new to Python you may not have seen <code>ctx: crescent.Context</code> before. This
+<p>If you are new to Python, you may not have seen <code>ctx: crescent.Context</code> before. This
 is called a type hint. It tells the reader what type <code>ctx</code> is, and your IDE can use
-type hints to provide better autocomplete. Although they are not required, it's
+type hints to provide better autocomplete. Although they are not required, it is
 recommended to use type hints whenever you can.</p>
 <pre><code class="language-python">#      The name of the argument   The return type
 #                 \/                    \/
@@ -499,7 +499,89 @@ sub_group = group.sub_group(&quot;sub-group&quot;, hooks=[hook_b])
 <p>Sub groups will inherit all hooks from the group.</p>
 <h3 id="hook-resolution-order"><a class="header" href="#hook-resolution-order">Hook Resolution Order</a></h3>
 <p><code>Command -&gt; Sub Group -&gt; Group -&gt; Plugin -&gt; Bot</code></p>
-<div style="break-before: page; page-break-before: always;"></div>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="plugins"><a class="header" href="#plugins">Plugins</a></h1>
+<p>Plugins are used to split your bot into multiple files. Plugins require your bot to be
+packaged, so it is recommended to follow this structure.</p>
+<pre><code>working_directory/
+    bot/
+        __main__.py
+        plugins/
+            plugin_a.py
+            plugin_b.py
+</code></pre>
+<p>The <code>__main__.py</code> file is where you create your bot. It would look something
+like this:</p>
+<pre><code class="language-python">import crescent
+
+bot = crescent.Bot(&quot;YOUR_TOKEN_HERE&quot;)
+
+bot.run()
+</code></pre>
+<p>Now to load plugins, simply use the <code>bot.plugins.load_folder</code> function.</p>
+<pre><code class="language-python">bot = crescent.Bot(&quot;YOUR_TOKEN_HERE&quot;)
+
+bot.plugins.load_folder(&quot;bot.plugins&quot;)
+
+bot.run()
+</code></pre>
+<p>When you run your bot with <code>python -m bot</code> from <code>working_directory</code>, plugins
+will be loaded on startup.</p>
+<blockquote>
+<p>ℹ️ The path that is used to load plugins is relative to the directory
+you are running the bot from.</p>
+</blockquote>
+<h2 id="inside-a-plugin-file"><a class="header" href="#inside-a-plugin-file">Inside a plugin file</a></h2>
+<p>In the inside of your plugin file you create a plugin class. You can use
+<code>@plugin.include</code> to add a command to your bot exactly the same way you
+would with <code>@bot.include</code>. The <code>plugin</code> variable must be called <code>plugin</code>.</p>
+<pre><code class="language-python">plugin = crescent.Plugin()
+
+@plugin.include
+@crescent.command
+class plugin_command:
+    async def callback(self, ctx: crescent.Context) -&gt; None:
+        await ctx.respond(&quot;Inside a plugin&quot;)
+</code></pre>
+<p>If you need to access your bot class inside a plugin file, you can use the
+<code>plugin.app</code> attribute. Accessing this attribute will raise an exception if
+the plugin is not yet loaded.</p>
+<pre><code class="language-python">plugin = crescent.Plugin()
+
+@plugin.include
+@crescent.command
+class plugin_command:
+    async def callback(self, ctx: crescent.Context) -&gt; None:
+        print(plugin.app)  # &lt;crescent.bot.Bot object at 0x????????????&gt;
+        ...
+</code></pre>
+<h2 id="hooks-1"><a class="header" href="#hooks-1">Hooks</a></h2>
+<p>Plugins allow you run to run functions when they are loaded and unloaded.</p>
+<pre><code class="language-python">plugin = crescent.Plugin()
+
+@plugin.load_hook
+def load():
+    print(&quot;The plugin is loaded&quot;)
+
+@plugin.unload_hook
+def unload():
+    print(&quot;The plugin is unloaded&quot;)
+</code></pre>
+<h2 id="type-safe-pluginapp"><a class="header" href="#type-safe-pluginapp">Type Safe <code>plugin.app</code></a></h2>
+<p>If you are using a inherited bot class you can subclass <code>crescent.Plugin</code> so
+<code>plugin.app</code> is typed with your class. </p>
+<pre><code class="language-python">import typing
+
+class MyBot(crescent.Bot):
+    ...
+
+
+class MyPlugin(crescent.Plugin):
+    def app(self) -&gt; MyBot:
+        return typing.cast(MyBot, super().app)
+
+typing.reveal_type(MyPlugin().app)  # `MyBot`
+</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
