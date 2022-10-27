@@ -1,7 +1,7 @@
 # Plugins
 
 Plugins are used to split your bot into multiple files. Plugins require your bot to be
-packaged, so it is recomended to follow this structure.
+packaged, so it is recommended to follow this structure.
 
 ```
 working_directory/
