@@ -1,8 +1,8 @@
-# crescent.ext.cooldowns
+# Cooldowns
 
-This module allows you to rate limit commands with a sliding window rate limit.
+This module allows you to rate limit users with a sliding window rate limit.
 
-The `crescent.ext.cooldowns` provides a hook.
+The `crescent.ext.cooldowns` module provides a hook.
 
 - `capacity` is the amount of times the command can be used in a timeframe.
 - `period` is the length of this timeframe.
@@ -24,7 +24,6 @@ async def cooldowned(ctx: crescent.Context):
 ## Rate Limited Hook
 Callbacks can be set to run when a user is ratelimited.
 
-
 ```python
 async def on_rate_limited(ctx: crescent.Context, time_remaining: float) -> None:
     await ctx.respond(f"You are ratelimited for {time_remaining}s.")
@@ -41,8 +40,7 @@ async def cooldowned(ctx: crescent.Context) -> None:
 
 The default bucket uses user IDs to seperate users.
 
-This is how the default bucket is implemented.
-
+This is how the default bucket is implemented:
 ```python
 import typing
 import crescent
@@ -51,8 +49,7 @@ def default_bucket(ctx: crescent.Context) -> typing.Any:
     return ctx.user.id
 ```
 
-This is a bucket that rate limits users based on ID and guild ID.
-
+This is a bucket that rate limits users based on ID and guild ID:
 ```python
 import crescent
 import typing

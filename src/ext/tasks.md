@@ -1,12 +1,12 @@
-# crescent.ext.tasks
+# Tasks
 
 This module allows you to loop functions on a certain time period.
 
-## loops
+## Loops
 
 Loops run a certain time period after you start the bot.
 
-Using kwargs, loops can be set to loop after a certain amount of hours, minutes,
+Using kwargs, functions can be set to loop after a certain amount of hours, minutes,
 or seconds.
 
 ```python
@@ -33,12 +33,12 @@ async def loop():
 ```
 
 
-## cronjobs
+## Cronjobs
 
 Cronjobs are supported with the `tasks.cronjob` function.
-!()[https://crontab.guru/] is useful for wrting cron expressions.
+[crontab.guru](https://crontab.guru/) is useful for wrting cron expressions.
 
-> NOTE: (croniter)[https://pypi.org/project/croniter/] is used for parsing
+> ℹ️ [croniter](https://pypi.org/project/croniter/) is used for parsing
 > cron expressions.
 
 ```python
