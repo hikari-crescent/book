@@ -8,7 +8,7 @@ I think this will make it better than other guides.
 ### Sections I want
 
 - [ ] Sales pitch
-- [ ] basics
+- [x] basics
 - [x] advanced commands (such as groups, message commands, user commands)
 - [x] advanced (plugins and hooks)
 - [x] ext
