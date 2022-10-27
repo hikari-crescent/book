@@ -46,4 +46,4 @@ Before you can start programming, you need to create a discord bot application.
 
     <img src="../resources/add.png" width="300"/>
 
-You are now ready to build a discord bot!
+### You are now ready to build a discord bot!
