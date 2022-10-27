@@ -28,7 +28,7 @@ Now to load plugins, simply use the `bot.plugins.load_folder` function.
 ```python
 bot = crescent.Bot("YOUR_TOKEN_HERE")
 
-bot.plugins.load_folder("bot/plugins")
+bot.plugins.load_folder("bot.plugins")
 
 bot.run()
 ```
