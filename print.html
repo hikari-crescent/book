@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="plugins/intro.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li class="spacer"></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="plugins/intro.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li class="chapter-item expanded "><a href="ext/intro.html"><strong aria-hidden="true">5.</strong> Extension Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ext/cooldowns.html"><strong aria-hidden="true">5.1.</strong> cooldown</a></li><li class="chapter-item expanded "><a href="ext/tasks.html"><strong aria-hidden="true">5.2.</strong> tasks</a></li><li class="spacer"></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -580,6 +580,108 @@ class MyPlugin(crescent.Plugin):
         return typing.cast(MyBot, super().app)
 
 typing.reveal_type(MyPlugin().app)  # `MyBot`
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="extension-modules"><a class="header" href="#extension-modules">Extension Modules</a></h1>
+<p>Modules in the <code>crescent.ext</code> namespace add extra functionality to crescent
+that not all users would need. The two built in modules are for rate limits
+and tasks.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cooldowns"><a class="header" href="#cooldowns">Cooldowns</a></h1>
+<p>This module allows you to rate limit users with a sliding window rate limit.</p>
+<p>The <code>crescent.ext.cooldowns</code> module provides a hook.</p>
+<ul>
+<li><code>capacity</code> is the amount of times the command can be used in a timeframe.</li>
+<li><code>period</code> is the length of this timeframe.</li>
+</ul>
+<pre><code class="language-python">import crescent
+from crescent.ext import cooldowns
+
+@bot.include
+# This command be used 3 times in 20 seconds.
+@crescent.hook(cooldowns.cooldown(capacity=3, period=20))
+@crescent.command
+async def cooldowned(ctx: crescent.Context):
+    print(&quot;Doing expensive operation...&quot;)
+    await ctx.respond(&quot;Hello!&quot;)
+</code></pre>
+<h2 id="rate-limited-hook"><a class="header" href="#rate-limited-hook">Rate Limited Hook</a></h2>
+<p>Callbacks can be set to run when a user is ratelimited.</p>
+<pre><code class="language-python">async def on_rate_limited(ctx: crescent.Context, time_remaining: float) -&gt; None:
+    await ctx.respond(f&quot;You are ratelimited for {time_remaining}s.&quot;)
+
+@bot.include
+@crescent.hook(cooldowns.cooldown(1, 100, callback=on_rate_limited))
+@crescent.command
+async def cooldowned(ctx: crescent.Context) -&gt; None:
+    print(&quot;Doing expensive operation...&quot;)
+    await ctx.respond(&quot;Hello!&quot;)
+</code></pre>
+<h2 id="custom-bucket"><a class="header" href="#custom-bucket">Custom Bucket</a></h2>
+<p>The default bucket uses user IDs to separate users.</p>
+<p>This is how the default bucket is implemented:</p>
+<pre><code class="language-python">import typing
+import crescent
+
+def default_bucket(ctx: crescent.Context) -&gt; typing.Any:
+    return ctx.user.id
+</code></pre>
+<p>This is a bucket that rate limits users based on ID and guild ID:</p>
+<pre><code class="language-python">import crescent
+import typing
+
+def custom_bucket(ctx: crescent.Context) -&gt; typing.Any:
+    return f&quot;{ctx.guild_id}{ctx.user.id}&quot;
+</code></pre>
+<p>To use a custom bucket, pass it into the <code>bucket</code> kwarg.</p>
+<pre><code class="language-python">@bot.include
+@crescent.hook(cooldowns.cooldown(3, 20, bucket=custom_bucket))
+@crescent.command
+async def cooldowned(ctx: crescent.Context):
+    print(&quot;Doing expensive operation...&quot;)
+    await ctx.respond(&quot;Hello!&quot;)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tasks"><a class="header" href="#tasks">Tasks</a></h1>
+<p>This module allows you to loop functions on a certain time period.</p>
+<h2 id="loops"><a class="header" href="#loops">Loops</a></h2>
+<p>Loops run a certain time period after you start the bot.</p>
+<p>Using kwargs, functions can be set to loop after a certain amount of hours, minutes,
+or seconds.</p>
+<pre><code class="language-python">from crescent.ext import tasks
+from datetime import datetime
+
+# This function runs once every minute.
+@tasks.loop(hours=0, minutes=1, seconds=0)
+async def loop():
+    print(datetime.now())
+</code></pre>
+<p>A <code>datetime.timedelta</code> object can be passed in to <code>tasks.loop</code> for more control
+over when the function loops.</p>
+<pre><code class="language-python">from crescent.ext import tasks
+from datetime import datetime, timedelta
+
+# This function runs once every day.
+@tasks.loop(timedelta(days=1))
+async def loop():
+    print(datetime.now())
+</code></pre>
+<h2 id="cronjobs"><a class="header" href="#cronjobs">Cronjobs</a></h2>
+<p>Cronjobs are supported with the <code>tasks.cronjob</code> function.
+<a href="https://crontab.guru/">crontab.guru</a> is useful for writing cron expressions.</p>
+<blockquote>
+<p>ℹ️ <a href="https://pypi.org/project/croniter/">croniter</a> is used for parsing
+cron expressions.</p>
+</blockquote>
+<pre><code class="language-python">from crescent.ext import tasks
+from datetime import datetime
+
+# This function runs once every minute.
+@tasks.cronjob(&quot;* * * * *&quot;)
+async def loop():
+    print(datetime.now())
+</code></pre>
+<p>The <code>on_startup=True</code> can be set to force the function to run when the bot is started.</p>
+<pre><code class="language-python">@tasks.cronjob(&quot;* * * * *&quot;, on_startup=True)
+async def loop():
+    print(datetime.now())
 </code></pre>
 
                     </main>

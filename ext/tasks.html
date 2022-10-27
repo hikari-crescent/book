@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Plugins - Crescent: A Beginner&#x27;s Guide</title>
+        <title>tasks - Crescent: A Beginner&#x27;s Guide</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="../basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="../basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="../basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="../advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="../advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="../advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="../advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/intro.html" class="active"><strong aria-hidden="true">4.</strong> Plugins</a></li><li class="chapter-item expanded "><a href="../ext/intro.html"><strong aria-hidden="true">5.</strong> Extension Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ext/cooldowns.html"><strong aria-hidden="true">5.1.</strong> cooldown</a></li><li class="chapter-item expanded "><a href="../ext/tasks.html"><strong aria-hidden="true">5.2.</strong> tasks</a></li><li class="spacer"></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="../basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="../basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="../basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="../advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="../advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="../advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="../advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/intro.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li class="chapter-item expanded "><a href="../ext/intro.html"><strong aria-hidden="true">5.</strong> Extension Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ext/cooldowns.html"><strong aria-hidden="true">5.1.</strong> cooldown</a></li><li class="chapter-item expanded "><a href="../ext/tasks.html" class="active"><strong aria-hidden="true">5.2.</strong> tasks</a></li><li class="spacer"></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,98 +134,57 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="plugins"><a class="header" href="#plugins">Plugins</a></h1>
-<p>Plugins are used to split your bot into multiple files. Plugins require your bot to be
-packaged, so it is recommended to follow this structure.</p>
-<pre><code>working_directory/
-    bot/
-        __main__.py
-        plugins/
-            plugin_a.py
-            plugin_b.py
+                        <h1 id="tasks"><a class="header" href="#tasks">Tasks</a></h1>
+<p>This module allows you to loop functions on a certain time period.</p>
+<h2 id="loops"><a class="header" href="#loops">Loops</a></h2>
+<p>Loops run a certain time period after you start the bot.</p>
+<p>Using kwargs, functions can be set to loop after a certain amount of hours, minutes,
+or seconds.</p>
+<pre><code class="language-python">from crescent.ext import tasks
+from datetime import datetime
+
+# This function runs once every minute.
+@tasks.loop(hours=0, minutes=1, seconds=0)
+async def loop():
+    print(datetime.now())
 </code></pre>
-<p>The <code>__main__.py</code> file is where you create your bot. It would look something
-like this:</p>
-<pre><code class="language-python">import crescent
+<p>A <code>datetime.timedelta</code> object can be passed in to <code>tasks.loop</code> for more control
+over when the function loops.</p>
+<pre><code class="language-python">from crescent.ext import tasks
+from datetime import datetime, timedelta
 
-bot = crescent.Bot(&quot;YOUR_TOKEN_HERE&quot;)
-
-bot.run()
+# This function runs once every day.
+@tasks.loop(timedelta(days=1))
+async def loop():
+    print(datetime.now())
 </code></pre>
-<p>Now to load plugins, simply use the <code>bot.plugins.load_folder</code> function.</p>
-<pre><code class="language-python">bot = crescent.Bot(&quot;YOUR_TOKEN_HERE&quot;)
-
-bot.plugins.load_folder(&quot;bot.plugins&quot;)
-
-bot.run()
-</code></pre>
-<p>When you run your bot with <code>python -m bot</code> from <code>working_directory</code>, plugins
-will be loaded on startup.</p>
+<h2 id="cronjobs"><a class="header" href="#cronjobs">Cronjobs</a></h2>
+<p>Cronjobs are supported with the <code>tasks.cronjob</code> function.
+<a href="https://crontab.guru/">crontab.guru</a> is useful for writing cron expressions.</p>
 <blockquote>
-<p>ℹ️ The path that is used to load plugins is relative to the directory
-you are running the bot from.</p>
+<p>ℹ️ <a href="https://pypi.org/project/croniter/">croniter</a> is used for parsing
+cron expressions.</p>
 </blockquote>
-<h2 id="inside-a-plugin-file"><a class="header" href="#inside-a-plugin-file">Inside a plugin file</a></h2>
-<p>In the inside of your plugin file you create a plugin class. You can use
-<code>@plugin.include</code> to add a command to your bot exactly the same way you
-would with <code>@bot.include</code>. The <code>plugin</code> variable must be called <code>plugin</code>.</p>
-<pre><code class="language-python">plugin = crescent.Plugin()
+<pre><code class="language-python">from crescent.ext import tasks
+from datetime import datetime
 
-@plugin.include
-@crescent.command
-class plugin_command:
-    async def callback(self, ctx: crescent.Context) -&gt; None:
-        await ctx.respond(&quot;Inside a plugin&quot;)
+# This function runs once every minute.
+@tasks.cronjob(&quot;* * * * *&quot;)
+async def loop():
+    print(datetime.now())
 </code></pre>
-<p>If you need to access your bot class inside a plugin file, you can use the
-<code>plugin.app</code> attribute. Accessing this attribute will raise an exception if
-the plugin is not yet loaded.</p>
-<pre><code class="language-python">plugin = crescent.Plugin()
-
-@plugin.include
-@crescent.command
-class plugin_command:
-    async def callback(self, ctx: crescent.Context) -&gt; None:
-        print(plugin.app)  # &lt;crescent.bot.Bot object at 0x????????????&gt;
-        ...
-</code></pre>
-<h2 id="hooks"><a class="header" href="#hooks">Hooks</a></h2>
-<p>Plugins allow you run to run functions when they are loaded and unloaded.</p>
-<pre><code class="language-python">plugin = crescent.Plugin()
-
-@plugin.load_hook
-def load():
-    print(&quot;The plugin is loaded&quot;)
-
-@plugin.unload_hook
-def unload():
-    print(&quot;The plugin is unloaded&quot;)
-</code></pre>
-<h2 id="type-safe-pluginapp"><a class="header" href="#type-safe-pluginapp">Type Safe <code>plugin.app</code></a></h2>
-<p>If you are using a inherited bot class you can subclass <code>crescent.Plugin</code> so
-<code>plugin.app</code> is typed with your class. </p>
-<pre><code class="language-python">import typing
-
-class MyBot(crescent.Bot):
-    ...
-
-
-class MyPlugin(crescent.Plugin):
-    def app(self) -&gt; MyBot:
-        return typing.cast(MyBot, super().app)
-
-typing.reveal_type(MyPlugin().app)  # `MyBot`
+<p>The <code>on_startup=True</code> can be set to force the function to run when the bot is started.</p>
+<pre><code class="language-python">@tasks.cronjob(&quot;* * * * *&quot;, on_startup=True)
+async def loop():
+    print(datetime.now())
 </code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../advanced_commands/exercises.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../ext/cooldowns.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a rel="next" href="../ext/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -233,11 +192,8 @@ typing.reveal_type(MyPlugin().app)  # `MyBot`
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../advanced_commands/exercises.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../ext/cooldowns.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a rel="next" href="../ext/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
