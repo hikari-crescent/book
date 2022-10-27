@@ -18,6 +18,10 @@
 
 - [Plugins](./plugins/intro.md)
 
+- [ext](./ext/intro.md)
+    - [cooldown](./ext/cooldowns.md)
+    - [tasks](./ext/tasks.md)
+
 ---
 
 <!-- [API Reference](https://magpie-dev.github.io/hikari-crescent/crescent.html) -->
