@@ -10,7 +10,7 @@ I think this will make it better than other guides.
 - [ ] Sales pitch
 - [ ] basics
 - [x] advanced commands (such as groups, message commands, user commands)
-- [ ] advanced (plugins and hooks)
+- [x] advanced (plugins and hooks)
 - [ ] ext
     - [ ] tasks
     - [ ] rate limits
@@ -19,6 +19,7 @@ I think this will make it better than other guides.
 
 ### Hikari things that are not related to crescent
 - [ ] Component support with miru
+- [ ] Component support with flare
 - [ ] Voice Support
 
 ### Extending/Hacking crescent
