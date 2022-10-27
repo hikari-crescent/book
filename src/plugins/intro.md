@@ -4,11 +4,12 @@ Plugins are used to split your bot into multiple files. Plugins require your bot
 packaged, so it is recomended to follow this structure.
 
 ```
-bot/
-    __main__.py
-    plugins/
-        plugin_a.py
-        plugin_b.py
+working_directory/
+    bot/
+        __main__.py
+        plugins/
+            plugin_a.py
+            plugin_b.py
 ```
 
 The `__main__.py` file is where you create your bot. It would look something
@@ -32,7 +33,8 @@ bot.plugins.load_folder("bot/plugins")
 bot.run()
 ```
 
-When you run your bot with `python -m bot`, it will load the plugins on startup.
+When you run your bot with `python -m bot` from `working_directory`, plugins
+will be loaded on startup.
 
 > ℹ️ The path that is used to load plugins is relative to the directory
 > you are running the bot from.
@@ -55,7 +57,7 @@ class plugin_command:
 
 If you need to access your bot class inside a plugin file, you can use the
 `plugin.app` attribute. Accessing this attribute will raise an exception if
-the bot is not yet loaded.
+the plugin is not yet loaded.
 
 ```python
 plugin = crescent.Plugin()
