@@ -38,7 +38,7 @@ async def cooldowned(ctx: crescent.Context) -> None:
 
 ## Custom Bucket
 
-The default bucket uses user IDs to seperate users.
+The default bucket uses user IDs to separate users.
 
 This is how the default bucket is implemented:
 ```python

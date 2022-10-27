@@ -36,7 +36,7 @@ async def loop():
 ## Cronjobs
 
 Cronjobs are supported with the `tasks.cronjob` function.
-[crontab.guru](https://crontab.guru/) is useful for wrting cron expressions.
+[crontab.guru](https://crontab.guru/) is useful for writing cron expressions.
 
 > ℹ️ [croniter](https://pypi.org/project/croniter/) is used for parsing
 > cron expressions.
@@ -51,7 +51,7 @@ async def loop():
     print(datetime.now())
 ```
 
-The `on_startup=True` can be set to force the function to run when the bot is sarted.
+The `on_startup=True` can be set to force the function to run when the bot is started.
 
 ```python
 @tasks.cronjob("* * * * *", on_startup=True)
