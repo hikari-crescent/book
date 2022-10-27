@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li><li class="chapter-item expanded "><a href="basic_commands/exercises.html"><strong aria-hidden="true">2.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li><li class="chapter-item expanded "><a href="advanced_commands/exercises.html"><strong aria-hidden="true">3.5.</strong> Exercises</a></li></ol></li><li class="chapter-item expanded "><a href="plugins/intro.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li class="chapter-item expanded "><a href="ext/intro.html"><strong aria-hidden="true">5.</strong> Extension Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ext/cooldowns.html"><strong aria-hidden="true">5.1.</strong> cooldown</a></li><li class="chapter-item expanded "><a href="ext/tasks.html"><strong aria-hidden="true">5.2.</strong> tasks</a></li><li class="spacer"></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li></ol></li><li class="chapter-item expanded "><a href="advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li></ol></li><li class="chapter-item expanded "><a href="plugins/intro.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li class="chapter-item expanded "><a href="ext/intro.html"><strong aria-hidden="true">5.</strong> Extension Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ext/cooldowns.html"><strong aria-hidden="true">5.1.</strong> Cooldowns</a></li><li class="chapter-item expanded "><a href="ext/tasks.html"><strong aria-hidden="true">5.2.</strong> Tasks</a></li><li class="spacer"></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,7 +146,56 @@ Discord bots. You will eventually build a bot from the ground up. This guide is 
 for people with basic Python knowledge.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="basics"><a class="header" href="#basics">Basics</a></h1>
 <p>This section will cover creating a bot and building your first command with Crescent.</p>
-<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="your-first-command"><a class="header" href="#your-first-command">Your first command</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-bot"><a class="header" href="#creating-a-bot">Creating a Bot</a></h1>
+<p>Before you can start programming, you need to create a discord bot application.</p>
+<ol>
+<li>
+<p>Navigate to <a href="https://discord.com/developers/applications">The Discord Application Portal</a></p>
+</li>
+<li>
+<p>Click on the blue button that says &quot;New Application&quot;.</p>
+<img src="basic_commands/../resources/new_application.png" width="500"/>
+</li>
+<li>
+<p>Choose a name for your application. This doesn't matter.</p>
+</li>
+<li>
+<p>Click on the &quot;Bot&quot; button.</p>
+<img src="basic_commands/../resources/bot_button.png" width="250"/>
+</li>
+<li>
+<p>Click on the blue &quot;Add Bot&quot; button.</p>
+<img src="basic_commands/../resources/build_a_bot_button.png" width="500"/>
+</li>
+<li>
+<p>Press &quot;Yes, Do It!&quot;</p>
+</li>
+<li>
+<p>Press the &quot;Reset Token&quot; button to claim your token. You may need to enter a authentication code. Write this down and don't share it to anybody. It will give them access to your bot!</p>
+<img src="basic_commands/../resources/reset_token.png" width="500"/>
+</li>
+<li>
+<p>Navigate to the oauth2 url generator.</p>
+<img src="basic_commands/../resources/oauth2.png" width="250"/>
+</li>
+<li>
+<p>Select the bot scope.</p>
+<img src="basic_commands/../resources/scope.png" width="500"/>
+</li>
+<li>
+<p>Scroll down and select the administrator permission. This is not required.</p>
+</li>
+<li>
+<p>Scroll farther down to the bottom of the page. Press the copy button.</p>
+<img src="basic_commands/../resources/copy.png" width="500"/>
+</li>
+<li>
+<p>Paste this URL into your web browser. You will get an invite page for your bot. Add the bot to a server you are going to develop it on.</p>
+<img src="basic_commands/../resources/add.png" width="300"/>
+</li>
+</ol>
+<h3 id="you-are-now-ready-to-build-a-discord-bot"><a class="header" href="#you-are-now-ready-to-build-a-discord-bot">You are now ready to build a discord bot!</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="your-first-command"><a class="header" href="#your-first-command">Your first command</a></h1>
 <p>Before you can create a command, you need to create a bot.</p>
 <pre><code class="language-python">import crescent
 
@@ -331,7 +380,7 @@ async def ping(ctx: crescent.Context):
     await ctx.respond(&quot;Pong!&quot;)
 </code></pre>
 <p>It is recommended to use function commands when your command does not have any options.</p>
-<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="command-advanced"><a class="header" href="#command-advanced">Command Advanced</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="command-advanced"><a class="header" href="#command-advanced">Command Advanced</a></h1>
 <p>This section covers advanced information for commands.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="user-and-message-commands"><a class="header" href="#user-and-message-commands">User and Message commands</a></h1>
 <p>So far only slash commands have been covered. There is two more types of application
@@ -499,7 +548,7 @@ sub_group = group.sub_group(&quot;sub-group&quot;, hooks=[hook_b])
 <p>Sub groups will inherit all hooks from the group.</p>
 <h3 id="hook-resolution-order"><a class="header" href="#hook-resolution-order">Hook Resolution Order</a></h3>
 <p><code>Command -&gt; Sub Group -&gt; Group -&gt; Plugin -&gt; Bot</code></p>
-<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="plugins"><a class="header" href="#plugins">Plugins</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="plugins"><a class="header" href="#plugins">Plugins</a></h1>
 <p>Plugins are used to split your bot into multiple files. Plugins require your bot to be
 packaged, so it is recommended to follow this structure.</p>
 <pre><code>working_directory/
