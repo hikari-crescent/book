@@ -16,6 +16,8 @@
     - [Hooks](./advanced_commands/hooks.md)
     - [Exercises](./advanced_commands/exercises.md)
 
+- [Plugins](./plugins/intro.md)
+
 ---
 
 <!-- [API Reference](https://magpie-dev.github.io/hikari-crescent/crescent.html) -->
