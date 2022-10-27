@@ -7,20 +7,20 @@
     - [Your first command](./basic_commands/first_command.md)
     - [Command options](./basic_commands/command_options.md)
     - [Function Commands](./basic_commands/function_commands.md)
-    - [Exercises](./basic_commands/exercises.md)
+    <!-- - [Exercises](./basic_commands/exercises.md) -->
 
 - [Command Advanced](./advanced_commands/intro.md)
     - [Message and user commands](./advanced_commands/user_message.md)
     - [Command Groups](./advanced_commands/command_groups.md)
     - [A Look into Context](./advanced_commands/context_deep_dive.md)
     - [Hooks](./advanced_commands/hooks.md)
-    - [Exercises](./advanced_commands/exercises.md)
+    <!-- - [Exercises](./advanced_commands/exercises.md) -->
 
 - [Plugins](./plugins/intro.md)
 
 - [Extension Modules](./ext/intro.md)
-    - [cooldown](./ext/cooldowns.md)
-    - [tasks](./ext/tasks.md)
+    - [Cooldowns](./ext/cooldowns.md)
+    - [Tasks](./ext/tasks.md)
 
 ---
 
