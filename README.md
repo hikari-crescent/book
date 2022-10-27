@@ -11,9 +11,9 @@ I think this will make it better than other guides.
 - [ ] basics
 - [x] advanced commands (such as groups, message commands, user commands)
 - [x] advanced (plugins and hooks)
-- [ ] ext
-    - [ ] tasks
-    - [ ] rate limits
+- [x] ext
+    - [x] tasks
+    - [x] rate limits
 - [ ] Real bot (likely one section)
 - [ ] Foreign ext libs
 
