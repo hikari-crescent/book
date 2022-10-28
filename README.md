@@ -11,6 +11,9 @@ I think this will make it better than other guides.
 - [x] basics
 - [x] advanced commands (such as groups, message commands, user commands)
 - [x] advanced (plugins and hooks)
+- [ ] autocomplete
+- [ ] events
+- [ ] error handling
 - [x] ext
     - [x] tasks
     - [x] rate limits
