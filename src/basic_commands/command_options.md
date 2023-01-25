@@ -13,7 +13,7 @@ amed "option" with the description "your custom description". The secondoption, 
 has the name "custom-name" and description "also your custom description".
 
 ```python
-@bot.include
+@client.include
 @crescent.command
 class MyCommand:
     option = crescent.option(str, "your custom description")
@@ -48,7 +48,7 @@ Options will be optional if a default value is provided. This example
 shows an option with the default value `None`.
 
 ```python
-@bot.include
+@client.include
 @crescent.command(name="command")
 class MyCommand:
     optional_option = crescent.option(str, default=None)
@@ -65,7 +65,7 @@ Strings, Ints, Floats, and Booleans all use python's built in types.
 > [the source code](https://github.com/magpie-dev/hikari-crescent/blob/main/crescent/commands/options.py#L140).
 
 ```python
-@bot.include
+@client.include
 @crescent.command(name="command")
 class MyCommand:
     word = crescent.option(str)
@@ -84,7 +84,7 @@ These types use a hikari object.
 ```python
 import hikari
 
-@bot.include
+@client.include
 @crescent.command(name="command")
 class MyCommand:
     user = crescent.option(hikari.User)
@@ -109,7 +109,7 @@ The final option type is mentionable, which allows a user to choose a user or ro
 ```python
 import hikari
 
-@bot.include
+@client.include
 @crescent.command(name="command")
 class MyCommand:
     mentionable = crescent.option(crescent.Mentionable)

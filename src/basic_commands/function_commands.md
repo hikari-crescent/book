@@ -4,7 +4,7 @@ Class commands can be cumbersome for small commands. Crescent provides function
 commands for those cases.
 
 ```python
-@bot.include
+@client.include
 @crescent.command
 async def ping(ctx: crescent.Context):
     await ctx.respond("Pong!")

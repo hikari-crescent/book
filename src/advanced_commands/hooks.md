@@ -13,7 +13,7 @@ async def my_hook(ctx: crescent.Context) -> None:
 To use this hook on a command, simply do:
 ```python
 
-@bot.include
+@client.include
 @crescent.hook(my_hook)
 @crescent.command
 async def my_command(ctx: crescent.Context) -> None:
@@ -41,7 +41,7 @@ async def no_Ls_allowed(ctx: crescent.Context) -> crescent.HookResult:
 
     return crescent.HookResult()
 
-@bot.include
+@client.include
 @crescent.hook(no_Ls_allowed)
 @crescent.command
 async def my_command(ctx: crescent.Context) -> None:
@@ -59,7 +59,7 @@ async def my_hook(ctx: crescent.Context) -> None:
 To use this hook on a command, simply do:
 ```python
 
-@bot.include
+@client.include
 @crescent.hook(my_hook, after=True)
 @crescent.command
 async def my_command(ctx: crescent.Context) -> None:

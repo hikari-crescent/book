@@ -14,6 +14,7 @@ from crescent.ext import tasks
 from datetime import datetime
 
 # This function runs once every minute.
+@client.include
 @tasks.loop(hours=0, minutes=1, seconds=0)
 async def loop():
     print(datetime.now())
@@ -27,6 +28,7 @@ from crescent.ext import tasks
 from datetime import datetime, timedelta
 
 # This function runs once every day.
+@client.include
 @tasks.loop(timedelta(days=1))
 async def loop():
     print(datetime.now())
@@ -46,6 +48,7 @@ from crescent.ext import tasks
 from datetime import datetime
 
 # This function runs once every minute.
+@client.include
 @tasks.cronjob("* * * * *")
 async def loop():
     print(datetime.now())
@@ -54,6 +57,7 @@ async def loop():
 The `on_startup=True` can be set to force the function to run when the bot is started.
 
 ```python
+@client.include
 @tasks.cronjob("* * * * *", on_startup=True)
 async def loop():
     print(datetime.now())

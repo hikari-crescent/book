@@ -12,13 +12,15 @@ working_directory/
             plugin_b.py
 ```
 
-The `__main__.py` file is where you create your bot. It would look something
+The `__main__.py` file is where you create your client. It would look something
 like this:
 
 ```python
 import crescent
+import hikari
 
-bot = crescent.Bot("YOUR_TOKEN_HERE")
+bot = hikari.GatewayBot("YOUR_TOKEN_HERE")
+client = crescent.Client(bot)
 
 bot.run()
 ```
@@ -26,9 +28,10 @@ bot.run()
 Now to load plugins, simply use the `bot.plugins.load_folder` function.
 
 ```python
-bot = crescent.Bot("YOUR_TOKEN_HERE")
+bot = hikari.GatewayBot("YOUR_TOKEN_HERE")
+client = crescent.Client(bot)
 
-bot.plugins.load_folder("bot.plugins")
+client.plugins.load_folder("bot.plugins")
 
 bot.run()
 ```
@@ -46,7 +49,7 @@ In the inside of your plugin file you create a plugin class. You can use
 would with `@bot.include`. The `plugin` variable must be called `plugin`.
 
 ```python
-plugin = crescent.Plugin()
+plugin = crescent.Plugin[hikari.GatewayBot, None]()
 
 @plugin.include
 @crescent.command
@@ -60,7 +63,7 @@ If you need to access your bot class inside a plugin file, you can use the
 the plugin is not yet loaded.
 
 ```python
-plugin = crescent.Plugin()
+plugin = crescent.Plugin[hikari.GatewayBot, None]()
 
 @plugin.include
 @crescent.command
@@ -75,7 +78,7 @@ class plugin_command:
 Plugins allow you run to run functions when they are loaded and unloaded.
 
 ```python
-plugin = crescent.Plugin()
+plugin = crescent.Plugin[hikari.GatewayBot, None]()
 
 @plugin.load_hook
 def load():
@@ -89,19 +92,16 @@ def unload():
 
 ## Type Safe `plugin.app`
 
-If you are using a inherited bot class you can subclass `crescent.Plugin` so
-`plugin.app` is typed with your class. 
+If you are using a inherited bot class you can change generics on `crescent.Plugin` so
+`plugin.app` is typed with your class.
 
 ```python
 import typing
 
-class MyBot(crescent.Bot):
+class MyBot(hikari.GatewayBot):
     ...
 
-
-class MyPlugin(crescent.Plugin):
-    def app(self) -> MyBot:
-        return typing.cast(MyBot, super().app)
+MyPlugin = crescent.Plugin[MyBot, None]
 
 typing.reveal_type(MyPlugin().app)  # `MyBot`
 ```

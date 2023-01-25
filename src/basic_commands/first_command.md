@@ -5,9 +5,10 @@ Before you can create a command, you need to create a bot.
 
 ```python
 import crescent
+import hikari
 
-bot = crescent.Bot("YOUR_BOT_TOKEN")
-
+bot = hikari.GatewayBot("YOUR_BOT_TOKEN")
+client = crescent.Client(bot)
 
 # `bot.run()` starts the bot.
 # Any code after this line will not be run until the bot is closed. 
@@ -23,12 +24,13 @@ The first command we will make is the ping command.
 
 ```python
 
-bot = crescent.Bot("YOUR_BOT_TOKEN")
+bot = hikari.GatewayBot("YOUR_BOT_TOKEN")
+client = crescent.Client(bot)
 
-# Commands can be defined after you create the bot variable
+# Commands can be defined after you create the client variable
 # and before `bot.run()`
 
-@bot.include
+@client.include
 @crescent.command(name="ping", description="Ping the bot.")
 class PingCommand:
     async def callback(self, ctx: crescent.Context) -> None:
@@ -69,7 +71,7 @@ def my_function(argument: SomeType) -> None:
 Options are added by adding class-attrs to the class.
 
 ```python
-@bot.include
+@client.include
 @crescent.include(name="say")
 class SayCommand:
 # The name of the command option

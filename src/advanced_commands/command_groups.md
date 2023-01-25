@@ -16,13 +16,13 @@ sub_group = group.sub_group("inner-group")
 To add a command to a group simply do:
 
 ```python
-@bot.include
+@client.include
 @group.child
 @crescent.command
 async def group_command(ctx: crescent.Context):
     ...
 
-@bot.include
+@client.include
 @sub_group.child
 @crescent.command
 async def sub_group_command(ctx: crescent.Context):
@@ -38,14 +38,14 @@ You can not create a group with the same name as a command.
 ```python
 help_group = crescent.Group("help")
 
-@bot.include
+@client.include
 @help_group.child
 @crescent.command
 async def say(ctx: crescent.Context):
     ...
 
 # This command will cause the bot to crash
-@bot.include
+@client.include
 @crescent.command
 async def help(ctx: crescent.Context):
     ...
