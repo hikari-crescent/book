@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Hooks - Crescent: A Beginner&#x27;s Guide</title>
+        <title>Commands - Crescent: A Beginner&#x27;s Guide</title>
 
 
         <!-- Custom HTML head -->
@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="../basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="../basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced_commands/user_message.html"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="../advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="../advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="../advanced_commands/hooks.html" class="active"><strong aria-hidden="true">3.4.</strong> Hooks</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/intro.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li class="chapter-item expanded "><a href="../ext/intro.html"><strong aria-hidden="true">5.</strong> Extension Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ext/cooldowns.html"><strong aria-hidden="true">5.1.</strong> Cooldowns</a></li><li class="chapter-item expanded "><a href="../ext/tasks.html"><strong aria-hidden="true">5.2.</strong> Tasks</a></li><li class="spacer"></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../commands/intro.html" class="active"><strong aria-hidden="true">2.</strong> Commands</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Command Basics</a></li><li class="chapter-item expanded "><a href="../commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command Options</a></li><li class="chapter-item expanded "><a href="../commands/user_message.html"><strong aria-hidden="true">2.4.</strong> Message and User Commands</a></li><li class="chapter-item expanded "><a href="../commands/command_groups.html"><strong aria-hidden="true">2.5.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="../commands/context_deep_dive.html"><strong aria-hidden="true">2.6.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="../commands/hooks.html"><strong aria-hidden="true">2.7.</strong> Hooks</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/intro.html"><strong aria-hidden="true">3.</strong> Plugins</a></li><li class="chapter-item expanded "><a href="../plugins/model.html"><strong aria-hidden="true">4.</strong> Model</a></li><li class="chapter-item expanded "><a href="../ext/intro.html"><strong aria-hidden="true">5.</strong> Extension Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ext/cooldowns.html"><strong aria-hidden="true">5.1.</strong> Cooldowns</a></li><li class="chapter-item expanded "><a href="../ext/tasks.html"><strong aria-hidden="true">5.2.</strong> Tasks</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../https://magpie-dev.github.io/hikari-crescent/crescent.html">API Reference</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,79 +141,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="hooks"><a class="header" href="#hooks">Hooks</a></h1>
-<p>Hooks allow you to run code before or after a command is run. They also allow you
-to create checks for a certain command.</p>
-<p>This is a simple hook that says &quot;hello there&quot; before every command you hook it to.</p>
-<pre><code class="language-python">async def my_hook(ctx: crescent.Context) -&gt; None:
-    await ctx.respond(&quot;Hello there&quot;)
-</code></pre>
-<p>To use this hook on a command, simply do:</p>
-<pre><code class="language-python">
-@client.include
-@crescent.hook(my_hook)
-@crescent.command
-async def my_command(ctx: crescent.Context) -&gt; None:
-    await ctx.respond(&quot;General Kenobi&quot;)
-</code></pre>
-<p>This command will respond &quot;Hello there&quot; and &quot;General kenobi&quot; in two different messages.</p>
-<p>You can access command options in hooks with <code>ctx.options</code>. This is a dict of option name to
-option value.</p>
-<h2 id="using-hooks-as-checks"><a class="header" href="#using-hooks-as-checks">Using hooks as checks</a></h2>
-<p>You can also stop a command callback from running in a hook. Simply return <code>crescent.HookResult(exit=True)</code></p>
-<p>This is a command that uses that feature. It stops you from using the command if your name has an &quot;L&quot; in it.</p>
-<pre><code class="language-python">async def no_Ls_allowed(ctx: crescent.Context) -&gt; crescent.HookResult:
-    if &quot;l&quot; in ctx.user.username.lower():
-        await ctx.respond(&quot;You can't use this command!&quot;)
-        return crescent.HookResult(exit=True)
-
-    return crescent.HookResult()
-
-@client.include
-@crescent.hook(no_Ls_allowed)
-@crescent.command
-async def my_command(ctx: crescent.Context) -&gt; None:
-    await ctx.respond(&quot;Hello&quot;)
-</code></pre>
-<h2 id="running-a-hook-after-a-command"><a class="header" href="#running-a-hook-after-a-command">Running a hook after a command</a></h2>
-<p>To run a hook after a command, add <code>after=True</code> to the decorator.
-This command will return &quot;General Kenobi&quot; then &quot;Hello there&quot; in two separate messages.</p>
-<pre><code class="language-python">async def my_hook(ctx: crescent.Context) -&gt; None:
-    await ctx.respond(&quot;Hello there&quot;)
-</code></pre>
-<p>To use this hook on a command, simply do:</p>
-<pre><code class="language-python">
-@client.include
-@crescent.hook(my_hook, after=True)
-@crescent.command
-async def my_command(ctx: crescent.Context) -&gt; None:
-    await ctx.respond(&quot;General Kenobi&quot;)
-</code></pre>
-<h2 id="adding-hooks-to-more-than-commands"><a class="header" href="#adding-hooks-to-more-than-commands">Adding hooks to more than commands</a></h2>
-<p>Bots and plugins (we will cover these later) support hooks by adding them with the
-<code>command_hooks</code> and <code>command_after_hooks</code> kwargs. Hooks on the bot object will run
-for all commands. Hooks on the plugin object will run for all commands in that plugin.</p>
-<pre><code class="language-python">bot = crescent.Bot(&quot;...&quot;, command_hooks=[hook_a, hook_b])
-</code></pre>
-<p><code>crescent.Group</code> and <code>crescent.SubGroup</code> also support hooks. Use the <code>hooks</code> and <code>after_hooks</code>
-kwargs to add them. Groups and sub groups will add hooks to any commands in their respective
-groups.</p>
-<pre><code class="language-python">group = crescent.Group(&quot;group&quot;, hooks=[hook_a])
-sub_group = group.sub_group(&quot;sub-group&quot;, hooks=[hook_b])
-</code></pre>
-<p>Sub groups will inherit all hooks from the group.</p>
-<h3 id="hook-resolution-order"><a class="header" href="#hook-resolution-order">Hook Resolution Order</a></h3>
-<p><code>Command -&gt; Sub Group -&gt; Group -&gt; Plugin -&gt; Bot</code></p>
+                        <h1 id="basics"><a class="header" href="#basics">Basics</a></h1>
+<p>This section will cover creating a bot and building your first command with Crescent.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../advanced_commands/context_deep_dive.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../plugins/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../commands/making_a_bot.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -223,11 +162,11 @@ sub_group = group.sub_group(&quot;sub-group&quot;, hooks=[hook_b])
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../advanced_commands/context_deep_dive.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../plugins/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../commands/making_a_bot.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

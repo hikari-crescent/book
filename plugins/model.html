@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Message and user commands - Crescent: A Beginner&#x27;s Guide</title>
+        <title>Model - Crescent: A Beginner&#x27;s Guide</title>
 
 
         <!-- Custom HTML head -->
@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../basic_commands/intro.html"><strong aria-hidden="true">2.</strong> Command Basics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../basic_commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Your first command</a></li><li class="chapter-item expanded "><a href="../basic_commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command options</a></li><li class="chapter-item expanded "><a href="../basic_commands/function_commands.html"><strong aria-hidden="true">2.4.</strong> Function Commands</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced_commands/intro.html"><strong aria-hidden="true">3.</strong> Command Advanced</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced_commands/user_message.html" class="active"><strong aria-hidden="true">3.1.</strong> Message and user commands</a></li><li class="chapter-item expanded "><a href="../advanced_commands/command_groups.html"><strong aria-hidden="true">3.2.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="../advanced_commands/context_deep_dive.html"><strong aria-hidden="true">3.3.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="../advanced_commands/hooks.html"><strong aria-hidden="true">3.4.</strong> Hooks</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/intro.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li class="chapter-item expanded "><a href="../ext/intro.html"><strong aria-hidden="true">5.</strong> Extension Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ext/cooldowns.html"><strong aria-hidden="true">5.1.</strong> Cooldowns</a></li><li class="chapter-item expanded "><a href="../ext/tasks.html"><strong aria-hidden="true">5.2.</strong> Tasks</a></li><li class="spacer"></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../commands/intro.html"><strong aria-hidden="true">2.</strong> Commands</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../commands/making_a_bot.html"><strong aria-hidden="true">2.1.</strong> Making a bot application</a></li><li class="chapter-item expanded "><a href="../commands/first_command.html"><strong aria-hidden="true">2.2.</strong> Command Basics</a></li><li class="chapter-item expanded "><a href="../commands/command_options.html"><strong aria-hidden="true">2.3.</strong> Command Options</a></li><li class="chapter-item expanded "><a href="../commands/user_message.html"><strong aria-hidden="true">2.4.</strong> Message and User Commands</a></li><li class="chapter-item expanded "><a href="../commands/command_groups.html"><strong aria-hidden="true">2.5.</strong> Command Groups</a></li><li class="chapter-item expanded "><a href="../commands/context_deep_dive.html"><strong aria-hidden="true">2.6.</strong> A Look into Context</a></li><li class="chapter-item expanded "><a href="../commands/hooks.html"><strong aria-hidden="true">2.7.</strong> Hooks</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/intro.html"><strong aria-hidden="true">3.</strong> Plugins</a></li><li class="chapter-item expanded "><a href="../plugins/model.html" class="active"><strong aria-hidden="true">4.</strong> Model</a></li><li class="chapter-item expanded "><a href="../ext/intro.html"><strong aria-hidden="true">5.</strong> Extension Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ext/cooldowns.html"><strong aria-hidden="true">5.1.</strong> Cooldowns</a></li><li class="chapter-item expanded "><a href="../ext/tasks.html"><strong aria-hidden="true">5.2.</strong> Tasks</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../https://magpie-dev.github.io/hikari-crescent/crescent.html">API Reference</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,32 +141,67 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="user-and-message-commands"><a class="header" href="#user-and-message-commands">User and Message commands</a></h1>
-<p>So far only slash commands have been covered. There is two more types of application
-commands: user context menu and message context menu commands. You can use these
-by right clicking on a user or message respectively.</p>
-<p>Both user and message commands are only supported as functions.</p>
-<pre><code class="language-python">@bot.include
-@crescent.user_command
-async def user_command(ctx: crescent.Context, user: hikari.User):
-    ...
+                        <h1 id="model"><a class="header" href="#model">Model</a></h1>
+<p>Passing information between different files is hard. That's why crescent provides the <code>model</code> attribute. A <code>model</code> is any object you want that will be dependency-injected into your plugins.</p>
+<pre><code class="language-python">import dataclasses
+import hikari
+import crescent
 
 
-@bot.include
-@crescent.message_command
-async def message_command(ctx: crescent.Context, message: hikari.Message):
-    ...
+# The example model is a dataclass. This class can be whatever you want.
+@dataclasses.dataclass
+class Model:
+    value = 5
+
+bot = hikari.GatewayBot(&quot;TOKEN&quot;)
+client = crescent.Client(bot, Model())
+</code></pre>
+<p>You should also update your plugin type alias to use the model you created.</p>
+<pre><code class="language-python">Plugin = crescent.Plugin[hikari.GatewayBot, Model]()
+</code></pre>
+<p>After the plugin is loaded, you can access your model with the <code>model</code> property.</p>
+<pre><code class="language-python"># The plugin option created in the previous code block.
+plugin = Plugin()
+
+@plugin.load_hook
+def on_load():
+    print(plugin.model)
+</code></pre>
+<h2 id="tips-and-tricks"><a class="header" href="#tips-and-tricks">Tips and Tricks</a></h2>
+<h3 id="objects-that-need-to-be-created-in-an-async-function"><a class="header" href="#objects-that-need-to-be-created-in-an-async-function">Objects That Need to be Created in an Async Function</a></h3>
+<p>Its common to have objects that need to be instatiated in an async function.
+The easiest way to do this is subscribing a method on your model to <code>hikari.StartingEvent</code>.</p>
+<pre><code class="language-python">class Model:
+    def __init__(self) -&gt; None:
+        self._db: Database | None = None
+
+    async def on_start(self, _: hikari.StartedEvent) -&gt; None:
+        self._db = await Database.create()
+
+    @property
+    def db(self) -&gt; Database:
+        assert self._db
+        return self._db
+
+model = Model()
+
+bot = hikari.GatewayBot(&quot;TOKEN&quot;)
+client = crescent.Client(bot, model)
+
+bot.event_manager.subscribe(hikari.StartedEvent, model.on_start)
+
+bot.run()
 </code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../advanced_commands/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../plugins/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../advanced_commands/command_groups.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../ext/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -176,11 +211,11 @@ async def message_command(ctx: crescent.Context, message: hikari.Message):
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../advanced_commands/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../plugins/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../advanced_commands/command_groups.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../ext/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
