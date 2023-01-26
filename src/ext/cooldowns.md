@@ -26,14 +26,12 @@ async def cooldowned(ctx: crescent.Context):
 Callbacks can be set to run when a user is ratelimited.
 
 ```python
-async def on_rate_limited(ctx: crescent.Context, time_remaining: float) -> None:
-    await ctx.respond(f"You are ratelimited for {time_remaining}s.")
+async def on_rate_limited(ctx: crescent.Context, time_remaining: datetime.timedelta) -> None:
+    await ctx.respond(f"You are ratelimited for {time_remaining.total_seconds()}s.")
 
 @client.include
-@crescent.hook(cooldowns.cooldown(
-    1,
-    datetime.timedelta(minutes=1),
-    callback=on_rate_limited),
+@crescent.hook(
+    cooldowns.cooldown(1, datetime.timedelta(minutes=1), callback=on_rate_limited),
 )
 @crescent.command
 async def cooldowned(ctx: crescent.Context) -> None:
