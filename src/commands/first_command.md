@@ -72,7 +72,7 @@ Options are added by adding class-attrs to the class.
 
 ```python
 @client.include
-@crescent.include(name="say")
+@crescent.command(name="say")
 class SayCommand:
 # The name of the command option
 #    \/
@@ -88,3 +88,39 @@ class SayCommand:
 Crescent's option syntax is type safe. This means that commands will
 seamlessly work with typecheckers like mypy and pyright.
 (You don't need to worry about this if you are new to Python!)
+
+
+# Function Commands
+
+Class commands can be cumbersome for small commands. Crescent provides function
+commands for those cases.
+
+```python
+@client.include
+@crescent.command
+async def ping(ctx: crescent.Context):
+    await ctx.respond("Pong!")
+```
+
+It is recommended to use function commands when your command does not have any options.
+
+# User and Message commands
+
+So far only slash commands have been covered. There is two more types of application
+commands: user context menu and message context menu commands. You can use these
+by right clicking on a user or message respectively.
+
+Both user and message commands are only supported as functions.
+
+```python
+@bot.include
+@crescent.user_command
+async def user_command(ctx: crescent.Context, user: hikari.User):
+    ...
+
+
+@bot.include
+@crescent.message_command
+async def message_command(ctx: crescent.Context, message: hikari.Message):
+    ...
+```

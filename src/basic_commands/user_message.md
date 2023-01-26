@@ -1,1 +1,0 @@
-# Message and user commands
