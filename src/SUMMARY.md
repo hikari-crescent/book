@@ -7,6 +7,7 @@
 - [Commands](./commands/intro.md)
     - [Command Basics](./commands/first_command.md)
     - [Command Options](./commands/command_options.md)
+    - [Autocomplete](./commands/autocomplete.md)
     - [Command Groups](./commands/command_groups.md)
     - [A Look into Context](./commands/context_deep_dive.md)
     - [Hooks](./commands/hooks.md)
