@@ -21,4 +21,4 @@
 
 ---
 
-[API Reference](https://magpie-dev.github.io/hikari-crescent/crescent.html)
+[API Reference](./api_reference_redirect.md)
