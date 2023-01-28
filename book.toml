@@ -2,5 +2,11 @@
 authors = ["Lunarmagpie"]
 language = "en"
 multilingual = false
+create-missing = false
 src = "src"
 title = "Crescent: A Beginner's Guide"
+
+[output.html]
+default-theme = "rust"
+search = { enable = true }
+print = { enable = false }
