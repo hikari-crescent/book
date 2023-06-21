@@ -20,7 +20,7 @@ client = crescent.Client(bot, Model())
 You should also update your plugin type alias to use the model you created.
 
 ```python
-Plugin = crescent.Plugin[hikari.GatewayBot, Model]()
+Plugin = crescent.Plugin[hikari.GatewayBot, Model]
 ```
 
 After the plugin is loaded, you can access your model with the `model` property.
