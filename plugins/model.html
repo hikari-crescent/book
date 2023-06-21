@@ -31,6 +31,7 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "../";
@@ -68,10 +69,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -153,7 +156,7 @@ bot = hikari.GatewayBot(&quot;TOKEN&quot;)
 client = crescent.Client(bot, Model())
 </code></pre>
 <p>You should also update your plugin type alias to use the model you created.</p>
-<pre><code class="language-python">Plugin = crescent.Plugin[hikari.GatewayBot, Model]()
+<pre><code class="language-python">Plugin = crescent.Plugin[hikari.GatewayBot, Model]
 </code></pre>
 <p>After the plugin is loaded, you can access your model with the <code>model</code> property.</p>
 <pre><code class="language-python"># The plugin option created in the previous code block.
@@ -237,5 +240,6 @@ bot.run()
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>
