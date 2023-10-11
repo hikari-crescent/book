@@ -195,7 +195,7 @@ def on_load():
 </code></pre>
 <h2 id="tips-and-tricks"><a class="header" href="#tips-and-tricks">Tips and Tricks</a></h2>
 <h3 id="objects-that-need-to-be-created-in-an-async-function"><a class="header" href="#objects-that-need-to-be-created-in-an-async-function">Objects That Need to be Created in an Async Function</a></h3>
-<p>Its common to have objects that need to be instatiated in an async function.
+<p>Its common to have objects that need to be instantiated in an async function.
 The easiest way to do this is subscribing a method on your model to <code>hikari.StartingEvent</code>.</p>
 <pre><code class="language-python">class Model:
     def __init__(self) -&gt; None:
