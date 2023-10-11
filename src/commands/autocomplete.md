@@ -6,10 +6,8 @@ The `autocomplete=` kwarg can be used for `int`, `float`, and `str` types.
 ```python
 async def autocomplete_response(
     ctx: crescent.AutocompleteContext, option: hikari.AutocompleteInteractionOption
-) -> Sequence[hikari.CommandChoice]:
-    return [
-        hikari.CommandChoice(name="Some Option", value="1234")
-    ]
+) -> Sequence[tuple[str | int | float, str]]:
+    return [("Some Option", "1234")]
 
 @client.include
 @crescent.command
@@ -28,7 +26,7 @@ these values are fetched from the cache. Otherwise, they need to be fetched from
 ```python
 async def fetch_autocomplete_options(
     ctx: crescent.AutocompleteContext, option: hikari.AutocompleteInteractionOption
-) -> Sequence[hikari.CommandChoice]:
+) -> Sequence[tuple[str, str]]:
     # An option dict where discord objects are all snowflakes.
     options = ctx.options
 
