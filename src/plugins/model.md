@@ -37,7 +37,7 @@ def on_load():
 ## Tips and Tricks
 ### Objects That Need to be Created in an Async Function
 
-Its common to have objects that need to be instatiated in an async function.
+Its common to have objects that need to be instantiated in an async function.
 The easiest way to do this is subscribing a method on your model to `hikari.StartingEvent`.
 
 ```python
